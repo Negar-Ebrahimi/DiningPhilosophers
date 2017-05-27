@@ -13,7 +13,7 @@ int chopstick[6]={1}; // I use indexes 1 to 5 in order to clarify the simulation
 void pickup_forks(int philosopherNumber){ //The philosopher wishes to eat
 	pthread_mutex_lock(&mutex);
 	while (!(chopstick[philosopherNumber] && chopstick[(philosopherNumber+1)%5])) {
-		pthread_cond_wait(&mutex, &cond_var);
+		pthread_cond_wait(&cond_var, &mutex);
 	printf("The philosopher %d picked up both of the chopsticks.\n", philosopherNumber);
 	pthread_mutex_unlock(&mutex);
 	}
